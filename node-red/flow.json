@@ -1,0 +1,253 @@
+[
+    {
+        "id": "19728b8c273c42fe",
+        "type": "tab",
+        "label": "Smart Lighting System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "db03ecf2350c0743",
+        "type": "mqtt in",
+        "z": "19728b8c273c42fe",
+        "name": "",
+        "topic": "smartlighting/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "e3420884751ccc14",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "549750af7a8aa685",
+                "e88b558151114349",
+                "dfc3587e628d2d06",
+                "de15b41ec253a277"
+            ]
+        ]
+    },
+    {
+        "id": "549750af7a8aa685",
+        "type": "debug",
+        "z": "19728b8c273c42fe",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "02fe3bc663234972",
+        "type": "ui_text",
+        "z": "19728b8c273c42fe",
+        "group": "5a745c722dd2d0d0",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Motion Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "dcb1fc667e5513dd",
+        "type": "ui_gauge",
+        "z": "19728b8c273c42fe",
+        "name": "",
+        "group": "5a745c722dd2d0d0",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Light Level",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "4095",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 350,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "031b03ac6a5cc674",
+        "type": "ui_text",
+        "z": "19728b8c273c42fe",
+        "group": "5a745c722dd2d0d0",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "LED Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e88b558151114349",
+        "type": "switch",
+        "z": "19728b8c273c42fe",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "smartlighting/motion",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "02fe3bc663234972"
+            ]
+        ]
+    },
+    {
+        "id": "de15b41ec253a277",
+        "type": "switch",
+        "z": "19728b8c273c42fe",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "smartlighting/light",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "dcb1fc667e5513dd"
+            ]
+        ]
+    },
+    {
+        "id": "dfc3587e628d2d06",
+        "type": "switch",
+        "z": "19728b8c273c42fe",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "smartlighting/led",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "031b03ac6a5cc674"
+            ]
+        ]
+    },
+    {
+        "id": "e3420884751ccc14",
+        "type": "mqtt-broker",
+        "name": "Hive MQTT",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5a745c722dd2d0d0",
+        "type": "ui_group",
+        "name": "Smart Lighting Dashboard",
+        "tab": "24da47478138f5ef",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "24da47478138f5ef",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1325a326d8dce1bf",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
